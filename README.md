@@ -1,9 +1,6 @@
 # Frontend for the Physics Chapters Business Association
---
 ## Further documentation (review this while coding)
-
 https://www.creative-tim.com/learning-lab/bootstrap/overview/material-kit?_ga=2.142107890.1101755314.1741000299-232689816.1740490105
---
 ## Requirements
 - Bootstrap
 - Material kit
