@@ -22,9 +22,7 @@
       z-index: 1100;
     }
     /* Parallax header at the top with background image */
-    .page-header {
-      /* Note: parallax effect turned off here as per provided code */
-      background-image: url('assets/img/FN_fbbanner.png');
+    .page-header.header-filter {
       height: 100vh;
     }
     /* Intro section (no parallax effect) */
@@ -56,76 +54,6 @@
     #main-card p {
       color: #fff;
     }
-    
-    /* --- New Companies Card Styles --- */
-    
-    #companies-card {
-      margin: 40px auto;
-      max-width: 1200px;
-      background-color: #000;
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-      border-radius: 6px;
-      padding: 15px; /* slim compared to main card */
-    }
-    
-    #companies-card h2 {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-    
-    .logos {
-      overflow: hidden;
-      padding: 20px 0;  /* reduced (slimmer) padding */
-      background: #000; /* dark background to match the card */
-      white-space: nowrap;
-      position: relative;
-    }
-    
-    .logos:before,
-    .logos:after {
-      position: absolute;
-      top: 0;
-      width: 250px;
-      height: 100%;
-      content: "";
-      z-index: 2;
-    }
-    
-    .logos:before {
-      left: 0;
-      background: linear-gradient(to left, rgba(0, 0, 0, 0), #000);
-    }
-    
-    .logos:after {
-      right: 0;
-      background: linear-gradient(to right, rgba(0, 0, 0, 0), #000);
-    }
-    
-    .logos:hover .logos-slide {
-      animation-play-state: paused;
-    }
-    
-    .logos-slide {
-      display: inline-block;
-      animation: 35s slide infinite linear;
-    }
-    
-    .logos-slide img {
-      height: 50px;
-      margin: 0 40px;
-    }
-    
-    @keyframes slide {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-100%);
-      }
-    }
-    /* --- End New Companies Card Styles --- */
   </style>
   <!-- CSS Just for demo purpose -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
@@ -176,14 +104,14 @@
       </div>
     </div>
   </nav>
-  
+
   <!-- Parallax Header (top background image) -->
-  <div class="page-header" data-parallax="false">
+  <div class="page-header" data-parallax="false" style="background-image: url('assets/img/FN_fbbanner.png');">
     <!-- No text content here -->
   </div>
-  
+
   <!-- Intro Section (scrolls normally, no parallax effect) -->
-  <section id="intro">
+  <section id="intro" >
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -195,7 +123,7 @@
       </div>
     </div>
   </section>
-  
+
   <!-- Main Card Section with Parallax Background -->
   <div id="card-parallax">
     <div id="main-card" class="main main-raised">
@@ -254,44 +182,7 @@
       </div>
     </div>
   </div>
-  
-  <!-- New Companies Card (Conveyor Belt Effect for Collaborators) -->
-  <div id="companies-card" class="main main-raised">
-    <div class="container">
-      <div class="section text-center">
-        <h2 class="title">Our Collaborators</h2>
-        <div class="logos">
-          <div class="logos-slide">
-            <img src="./assets/img/companies/Ericsson.svg" />
-            <img src="./assets/img/companies/JaneStreet.svg" />
-            <img src="./assets/img/companies/McKinsey.svg" />
-            <img src="./assets/img/companies/Novatron.png" />
-            <img src="./assets/img/companies/OliverWyman.svg" />
-            <img src="./assets/img/companies/Bain.svg" />
-            <img src="./assets/img/companies/GoldmanSachs.svg" />
-            <img src="./assets/img/companies/BCG.svg" />
-          </div>
-    
-          <div class="logos-slide">
-            <img src="./assets/img/companies/Ericsson.svg" />
-            <img src="./assets/img/companies/JaneStreet.svg" />
-            <img src="./assets/img/companies/McKinsey.svg" />
-            <img src="./assets/img/companies/Novatron.png" />
-            <img src="./assets/img/companies/OliverWyman.svg" />
-            <img src="./assets/img/companies/Bain.svg" />
-            <img src="./assets/img/companies/GoldmanSachs.svg" />
-            <img src="./assets/img/companies/BCG.svg" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    var copy = document.querySelector(".logos-slide").cloneNode(true);
-    document.querySelector(".logos").appendChild(copy);
-  </script>
-  
+
   <!-- Footer -->
   <footer class="footer footer-default">
     <div class="container">
@@ -300,7 +191,7 @@
       </div>
     </div>
   </footer>
-  
+
   <!-- Core JS Files -->
   <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
   <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
