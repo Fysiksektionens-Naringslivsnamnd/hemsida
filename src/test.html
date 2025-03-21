@@ -5,9 +5,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Fysiksektionens Näringslivsnämnd
-  </title>
+  <title>Material Kit by Creative Tim</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
   <!-- Fonts and icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -23,12 +21,8 @@
     #sectionsNav {
       z-index: 1100;
     }
-    /* Parallax header at the top with background image and gradient overlay */
-    .page-header {
-      background:
-        linear-gradient(to bottom, rgba(6,12,21,0) 0%, rgba(6,12,21,1) 100%),
-        url('assets/img/FN_fbbanner.png') no-repeat center center;
-      background-size: cover;
+    /* Parallax header at the top with background image */
+    .page-header.header-filter {
       height: 100vh;
     }
     /* Intro section (no parallax effect) */
@@ -43,7 +37,7 @@
       width: 100%;
       background: transparent;
     }
-
+    
     /* Main card styling */
     #main-card {
       margin: 0 auto;
@@ -60,76 +54,6 @@
     #main-card p {
       color: #fff;
     }
-
-    /* --- New Companies Card Styles --- */
-
-    #companies-card {
-      margin: 40px auto;
-      max-width: 1200px;
-      background-color: #000;
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-      border-radius: 6px;
-      padding: 15px; /* slim compared to main card */
-    }
-
-    #companies-card h2 {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    .logos {
-      overflow: hidden;
-      padding: 20px 0;  /* reduced (slimmer) padding */
-      background: #000; /* dark background to match the card */
-      white-space: nowrap;
-      position: relative;
-    }
-
-    .logos:before,
-    .logos:after {
-      position: absolute;
-      top: 0;
-      width: 250px;
-      height: 100%;
-      content: "";
-      z-index: 2;
-    }
-
-    .logos:before {
-      left: 0;
-      background: linear-gradient(to left, rgba(0, 0, 0, 0), #000);
-    }
-
-    .logos:after {
-      right: 0;
-      background: linear-gradient(to right, rgba(0, 0, 0, 0), #000);
-    }
-
-    .logos:hover .logos-slide {
-      animation-play-state: paused;
-    }
-
-    .logos-slide {
-      display: inline-block;
-      animation: 35s slide infinite linear;
-    }
-
-    .logos-slide img {
-      height: 50px;
-      margin: 0 40px;
-    }
-
-    @keyframes slide {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-100%);
-      }
-    }
-    /* --- End New Companies Card Styles --- */
   </style>
   <!-- CSS Just for demo purpose -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
@@ -153,12 +77,12 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="pages/join.html">
-              <i class="material-icons"></i> Join us
+              <i class="material-icons">info</i> Join us
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/contact.html">
-              <i class="material-icons"></i> Contact
+              <i class="material-icons">search</i> Contact
             </a>
           </li>
           <li class="nav-item">
@@ -172,7 +96,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/fysik.naringsliv/" target="_blank" data-original-title="Follow us on Instagram">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
               <i class="fa fa-instagram"></i>
             </a>
           </li>
@@ -181,20 +105,20 @@
     </div>
   </nav>
 
-  <!-- Parallax Header (top background image with gradient overlay) -->
-  <div class="page-header" data-parallax="false">
+  <!-- Parallax Header (top background image) -->
+  <div class="page-header" data-parallax="false" style="background-image: url('assets/img/FN_fbbanner.png');">
     <!-- No text content here -->
   </div>
 
   <!-- Intro Section (scrolls normally, no parallax effect) -->
-  <section id="intro">
+  <section id="intro" >
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <h1 class="title" style="color: white;">Connecting Students with Industry</h1>
           <h4>We help students in Engineering Physics and Mathematics connect with companies through career fairs, networking events, and internships.</h4>
           <br>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAV8TBfnjka1M2xyNg8QHR85nFrR22iJI9vcfrcTMjYjB7Ng/viewform" class="btn btn-outline-warning btn-lg">Newsletter</a>
+          <a href="#" class="btn btn-primary btn-raised btn-lg">Newsletter</a>
         </div>
       </div>
     </div>
@@ -258,43 +182,6 @@
       </div>
     </div>
   </div>
-
-  <!-- New Companies Card (Conveyor Belt Effect for Collaborators) -->
-  <div id="companies-card" class="main main-raised">
-    <div class="container">
-      <div class="section text-center">
-        <h2 class="title">Our Collaborators</h2>
-        <div class="logos">
-          <div class="logos-slide">
-            <img src="./assets/img/companies/Ericsson.svg" />
-            <img src="./assets/img/companies/JaneStreet.svg" />
-            <img src="./assets/img/companies/McKinsey.svg" />
-            <img src="./assets/img/companies/Novatron.png" />
-            <img src="./assets/img/companies/OliverWyman.svg" />
-            <img src="./assets/img/companies/Bain.svg" />
-            <img src="./assets/img/companies/GoldmanSachs.svg" />
-            <img src="./assets/img/companies/BCG.svg" />
-          </div>
-
-          <div class="logos-slide">
-            <img src="./assets/img/companies/Ericsson.svg" />
-            <img src="./assets/img/companies/JaneStreet.svg" />
-            <img src="./assets/img/companies/McKinsey.svg" />
-            <img src="./assets/img/companies/Novatron.png" />
-            <img src="./assets/img/companies/OliverWyman.svg" />
-            <img src="./assets/img/companies/Bain.svg" />
-            <img src="./assets/img/companies/GoldmanSachs.svg" />
-            <img src="./assets/img/companies/BCG.svg" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    var copy = document.querySelector(".logos-slide").cloneNode(true);
-    document.querySelector(".logos").appendChild(copy);
-  </script>
 
   <!-- Footer -->
   <footer class="footer footer-default">
