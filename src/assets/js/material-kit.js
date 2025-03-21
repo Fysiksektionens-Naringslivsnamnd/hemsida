@@ -155,6 +155,8 @@ materialKit = {
     });
   },
 
+
+  // this function makes the navbar non-transparent when it is scrolled down
   checkScrollForTransparentNavbar: debounce(function() {
     if ($(document).scrollTop() > scroll_distance) {
       if (materialKit.misc.transparent) {
