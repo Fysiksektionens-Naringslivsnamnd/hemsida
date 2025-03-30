@@ -2,71 +2,215 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact</title>
-  <link rel="stylesheet" href="../assets/css/material-kit.css?v=2.0.4">
+  <link rel="stylesheet" href="../assets/css/material-kit.css?v=2.0.4" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <style>
+    .page-header h1 {
+      font-size: 6rem;
+    }
+    html, body {
+      height: 100%;
+      background-color: #060c15;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1 0 auto;
+    }
+
+    .page-header {
+      position: relative;
+      background:
+        linear-gradient(to bottom, rgba(6,12,21,0.2) 0%, rgba(6,12,21,1) 100%),
+        url('../assets/img/about-banner.jpg') no-repeat center center;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .animated-title span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(-100px) translateZ(-300px) scale(0.8);
+      color: #ff9800;
+      animation: slideZoomFade 1.2s forwards;
+    }
+
+    .animated-title span:nth-child(1)  { animation-delay: 0s; }
+    .animated-title span:nth-child(2)  { animation-delay: 0.12s; }
+    .animated-title span:nth-child(3)  { animation-delay: 0.24s; }
+    .animated-title span:nth-child(4)  { animation-delay: 0.36s; }
+    .animated-title span:nth-child(5)  { animation-delay: 0.48s; }
+    .animated-title span:nth-child(6)  { animation-delay: 0.60s; }
+    .animated-title span:nth-child(7)  { animation-delay: 0.72s; }
+    .animated-title span:nth-child(8)  { animation-delay: 0.84s; }
+    .animated-title span:nth-child(9)  { animation-delay: 0.96s; }
+    .animated-title span:nth-child(10) { animation-delay: 1.08s; }
+
+    @keyframes slideZoomFade {
+      to {
+        opacity: 1;
+        transform: translateX(0) translateZ(0) scale(1);
+        color: white;
+      }
+    }
+
+    .arrow-icon {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 5rem;
+      opacity: 0;
+      color: #ff9800;
+      animation:
+        arrowFadeIn 0.6s ease-out forwards 1.5s,
+        arrowPulse 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes arrowFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes arrowPulse {
+      0% {
+        color: #ff9800;
+      }
+      100% {
+        color: white;
+      }
+    }
+
+    #main-card {
+      margin: 0 auto 60px auto;
+      max-width: 1000px;
+      background-color: #000;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 40px 30px;
+    }
+
+    #main-card h2,
+    #main-card h4,
+    #main-card p {
+      color: #fff;
+    }
+
+    .btn-outline-warning {
+      border-color: #ff9800;
+      color: #ff9800;
+    }
+
+    .btn-outline-warning:hover {
+      background-color: #ff9800;
+      color: white;
+    }
+
+    footer.footer {
+      background: #060c15;
+      color: #fff;
+      flex-shrink: 0;
+    }
+  </style>
 </head>
 
-<body class="contact-page">
-    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100">
-        <div class="container">
-          <a class="navbar-brand" href="../index.html">
-            <img src="../assets/img/favicon.png" alt="Favicon" style="height: 30px;"> Home
-          </a>
-        </div>
-    </nav>
-  
-    <div class="page-header header-filter" style="background-image: url('../assets/img/about-banner.jpg');">
-      <div class="container text-center">
-        <h1 class="title">Contact Us</h1>
+<body class="contact-page sidebar-collapse">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="../index.html">
+          <img src="../assets/img/favicon.png" alt="Favicon" style="height: 30px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="join.html">Join us</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" rel="tooltip" href="https://www.linkedin.com/company/fysiksektionens-n%C3%A4ringslivsn%C3%A4mnd/posts/?feedView=all" target="_blank" title="Follow us on LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+          <li class="nav-item"><a class="nav-link" rel="tooltip" href="https://www.facebook.com/FysiksektionensNaringslivsnamnd?locale=sv_SE" target="_blank" title="Like us on Facebook"><i class="fa fa-facebook-square"></i></a></li>
+          <li class="nav-item"><a class="nav-link" rel="tooltip" href="https://www.instagram.com/fysik.naringsliv/" target="_blank" title="Follow us on Instagram"><i class="fa fa-instagram"></i></a></li>
+        </ul>
       </div>
     </div>
-  
-    <div class="main main-raised">
-      
-        <div class="section section-contacts">
-            <div class="row">
-              <div class="col-md-8 ml-auto mr-auto">
-                <h2 class="text-center title">Reach out to talent</h2>
-                <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-                <form class="contact-form">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="bmd-label-floating">Your Name</label>
-                        <input type="email" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="bmd-label-floating">Your Email</label>
-                        <input type="email" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
-                    <textarea type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4 ml-auto mr-auto text-center">
-                      <button class="btn btn-primary btn-raised">
-                        Send Message
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-        </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Header -->
+    <div class="page-header">
+      <div class="header-content">
+        <h1 class="title animated-title" id="contact-title">Contact Us</h1>
+      </div>
+      <div class="material-icons arrow-icon">keyboard_arrow_down</div>
     </div>
 
-    
+    <!-- Contact Card -->
+    <div id="main-card" class="main main-raised">
+      <div class="section section-contacts">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="text-center title">Reach out to talent</h2>
+            <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will get back to you in a couple of hours.</h4>
+            <form class="contact-form">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Your Name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Your Email</label>
+                    <input type="email" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
+                <textarea class="form-control" rows="4" id="exampleMessage"></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-4 ml-auto mr-auto text-center">
+                  <button class="btn btn-outline-warning btn-lg">Send Message</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-
-
-  <footer class="footer">
+  <!-- Footer -->
+  <footer class="footer footer-default">
     <div class="container">
       <nav class="float-left">
         <ul>
@@ -75,15 +219,27 @@
         </ul>
       </nav>
       <div class="copyright float-right">
-        &copy; <script>document.write(new Date().getFullYear())</script>, Built for Students.
+        &copy; <script>document.write(new Date().getFullYear())</script>, Business Committee - Physics & Mathematics KTH.
       </div>
     </div>
   </footer>
 
-  <!-- Core JS Files -->
+  <!-- Scripts -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/material-kit.js?v=2.0.4"></script>
+
+  <script>
+    const title = document.getElementById('contact-title');
+    const text = title.textContent.trim();
+    title.innerHTML = '';
+    [...text].forEach(char => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      title.appendChild(span);
+    });
+  </script>
 </body>
 
 </html>
