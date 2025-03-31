@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events</title>
+  <link rel="stylesheet" href="../assets/css/material-kit.css?v=2.0.4" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #060c15;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1 0 auto;
+      background-color: #060c15;
+    }
+
+    .navbar {
+      z-index: 1100;
+    }
+
+    .page-header {
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      margin-top: 8%;
+    }
+
+    .page-header h1 {
+      color: white;
+      font-size: 3rem;
+      margin: 0;
+      word-break: break-word;
+    }
+
+    .main {
+      background-color: #060c15;
+      margin: 60px 15px 120px;
+      position: relative;
+    }
+
+    .card {
+      background-color: #000;
+      color: white;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 6px 25px rgba(255, 255, 255, 0.1);
+    }
+
+    .card .card-body {
+      flex-grow: 1;
+    }
+
+    .card .card-body h4 {
+      color: #ff9800;
+    }
+
+    .card .card-body .card-date {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-bottom: 10px;
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+  </style>
+</head>
+
+<body class="events-page sidebar-collapse">
+
+  <!-- Navbar (unchanged from index) -->
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
+    id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="../index.html">
+          <img src="../assets/img/favicon.png" alt="Favicon" style="height: 30px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="events.html">
+                <i class="material-icons"></i> Events
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="join.html">
+                <i class="material-icons"></i> Join us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">
+                <i class="material-icons"></i> Contact
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.linkedin.com/company/fysiksektionens-n%C3%A4ringslivsn%C3%A4mnd/posts/?feedView=all" target="_blank" data-original-title="Follow us on LinkedIn">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/FysiksektionensNaringslivsnamnd?locale=sv_SE" target="_blank" data-original-title="Like us on Facebook">
+                <i class="fa fa-facebook-square"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/fysik.naringsliv/" target="_blank" data-original-title="Follow us on Instagram">
+                <i class="fa fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header with centered title -->
+  <header class="page-header">
+    <h1 class="title">Upcoming Events</h1>
+  </header>
+
+  <!-- Event Cards -->
+  <main class="main">
+    <div class="container">
+      <div class="row">
+        <!-- Event Card 1 -->
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img class="card-img-top" src="../assets/img/case.jpg" alt="Event 1">
+            <div class="card-body">
+              <h4 class="card-title">Tech Talk with Ericsson</h4>
+              <p class="card-date">April 12, 2025</p>
+              <p class="card-text">Engineers from Ericsson share insights into machine learning and real-world data challenges.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 2 -->
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img class="card-img-top" src="../assets/img/case.jpg" alt="Event 2">
+            <div class="card-body">
+              <h4 class="card-title">Case Night with BCG</h4>
+              <p class="card-date">April 22, 2025</p>
+              <p class="card-text">Tackle business problems in teams and learn consulting strategies with professionals from BCG.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Card 3 -->
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img class="card-img-top" src="../assets/img/case.jpg" alt="Event 3">
+            <div class="card-body">
+              <h4 class="card-title">Lunch Seminar: Novatron Fusion</h4>
+              <p class="card-date">May 3, 2025</p>
+              <p class="card-text">Explore the future of sustainable energy with Sweden's leading fusion energy researchers.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Add more cards if needed -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer footer-default">
+    <div class="container">
+      <div class="copyright float-right">
+        &copy; <script>document.write(new Date().getFullYear())</script>, Business Committee - Physics & Mathematics KTH.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/material-kit.js?v=2.0.4"></script>
+</body>
+
+</html>
