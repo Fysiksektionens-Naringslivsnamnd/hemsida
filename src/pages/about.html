@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
+  <link rel="stylesheet" href="../assets/css/material-kit.css?v=2.0.4" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+  <style>
+    body {
+      background-color: #060c15;
+      color: white;
+    }
+
+    .profile-card {
+      background-color: #0a1220;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      object-fit: cover;
+    }
+
+    .profile-card h4 {
+      margin-bottom: 5px;
+      color: #ff9800;
+    }
+
+    .profile-card p {
+      font-size: 0.95rem;
+      color: #bbb;
+    }
+
+    .page-header {
+      text-align: center;
+      margin: 80px 0 40px;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="events-page sidebar-collapse">
+
+  <!-- Navbar (unchanged from index) -->
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
+    id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="../index.html">
+          <img src="../assets/img/favicon.png" alt="Favicon" style="height: 30px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="events.html">
+                <i class="material-icons"></i> Events
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">
+                <i class="material-icons"></i> About
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">
+                <i class="material-icons"></i> Contact
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.linkedin.com/company/fysiksektionens-n%C3%A4ringslivsn%C3%A4mnd/posts/?feedView=all" target="_blank" data-original-title="Follow us on LinkedIn">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/FysiksektionensNaringslivsnamnd?locale=sv_SE" target="_blank" data-original-title="Like us on Facebook">
+                <i class="fa fa-facebook-square"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/fysik.naringsliv/" target="_blank" data-original-title="Follow us on Instagram">
+                <i class="fa fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Meet Our Team</h1>
+  </div>
+
+  <!-- Team Members -->
+  <div class="container">
+    <div class="row">
+
+      <!-- President #1 -->
+      <div class="col-md-4 mb-4">
+        <div class="profile-card">
+          <img src="../assets/img/faces/profil.jpg" alt="President 1">
+          <h4>President #1</h4>
+          <p>Oversees all operations and leads strategic planning within the committee.</p>
+        </div>
+      </div>
+
+      <!-- President #2 -->
+      <div class="col-md-4 mb-4">
+        <div class="profile-card">
+          <img src="../assets/img/faces/profil.jpg" alt="President 2">
+          <h4>President #2</h4>
+          <p>Co-leads initiatives and collaborates with external partners and sponsors.</p>
+        </div>
+      </div>
+
+      <!-- Vice President -->
+      <div class="col-md-4 mb-4">
+        <div class="profile-card">
+          <img src="../assets/img/faces/profil.jpg" alt="Vice President">
+          <h4>Vice President</h4>
+          <p>Supports the presidents and handles internal coordination and events.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer footer-default">
+    <div class="container">
+      <div class="copyright float-right">
+        &copy; <script>document.write(new Date().getFullYear())</script>, Business Committee - Physics & Mathematics KTH.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../assets/js/material-kit.js?v=2.0.4"></script>
+
+</body>
+
+</html>
