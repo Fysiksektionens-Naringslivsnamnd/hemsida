@@ -121,8 +121,8 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="join.html">
-                <i class="material-icons"></i> Join us
+              <a class="nav-link" href="about.html">
+                <i class="material-icons"></i> About
               </a>
             </li>
             <li class="nav-item">
@@ -158,43 +158,8 @@
   <!-- Event Cards -->
   <main class="main">
     <div class="container">
-      <div class="row">
-        <!-- Event Card 1 -->
-        <div class="col-md-4 d-flex">
-          <div class="card w-100">
-            <img class="card-img-top" src="../assets/img/case.jpg" alt="Event 1">
-            <div class="card-body">
-              <h4 class="card-title">Tech Talk with Ericsson</h4>
-              <p class="card-date">April 12, 2025</p>
-              <p class="card-text">Engineers from Ericsson share insights into machine learning and real-world data challenges.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Card 2 -->
-        <div class="col-md-4 d-flex">
-          <div class="card w-100">
-            <img class="card-img-top" src="../assets/img/case.jpg" alt="Event 2">
-            <div class="card-body">
-              <h4 class="card-title">Case Night with BCG</h4>
-              <p class="card-date">April 22, 2025</p>
-              <p class="card-text">Tackle business problems in teams and learn consulting strategies with professionals from BCG.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Card 3 -->
-        <div class="col-md-4 d-flex">
-          <div class="card w-100">
-            <img class="card-img-top" src="../assets/img/case.jpg" alt="Event 3">
-            <div class="card-body">
-              <h4 class="card-title">Lunch Seminar: Novatron Fusion</h4>
-              <p class="card-date">May 3, 2025</p>
-              <p class="card-text">Explore the future of sustainable energy with Sweden's leading fusion energy researchers.</p>
-            </div>
-          </div>
-        </div>
-        <!-- Add more cards if needed -->
+      <div class="row" id="event-cards">
+        <!-- Event cards will be dynamically inserted here -->
       </div>
     </div>
   </main>
@@ -209,6 +174,25 @@
   </footer>
 
   <!-- Scripts -->
+  <script>
+  fetch('/api/events')
+    .then(response => response.json())
+    .then(events => {
+      const container = document.getElementById('event-cards');
+      container.innerHTML = events.map(event => `
+        <div class="col-md-4 d-flex">
+          <div class="card w-100">
+            <img class="card-img-top" src="${event.image}" alt="${event.title}">
+            <div class="card-body">
+              <h4 class="card-title">${event.title}</h4>
+              <p class="card-date">${event.date}</p>
+              <p class="card-text">${event.description}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    });
+</script>
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
