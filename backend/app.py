@@ -1,6 +1,15 @@
 from flask import Flask, jsonify, send_from_directory, request, redirect, render_template
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import smtplib
 import json
 import os
+
+SMTP_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
+SMTP_USER = "e.o.duvander@gmail.com"  # will need to create a designated adress for this
+SMTP_PASSWORD = os.environ.get("SMTP_PW")
+TO_EMAIL = 'dunderduvan@gmail.com'  # this will be set to the FN email
 
 app = Flask(__name__, static_folder='../src', static_url_path='')
 
@@ -29,13 +38,38 @@ def contact():
         # Handle form submission
         name = request.form['name']
         email = request.form['email']
-        message = request.form['message']
+        message = request.form['msg']
+
+        subject = "New Contact Form Submission"
+        body = f"""
+                You have received a new message from your website contact form:
+
+                Name: {name}
+                Email: {email}
+                Message:
+                {message}
+                """
+        send_email(subject, body)
 
         #TODO: This info needs to be sent to designated email and saved to storage
 
         return redirect("/index.html") # Redirect to a thank you page or similar
 
     return redirect('index.html')
+
+def send_email(subject, body):
+    msg = MIMEMultipart()
+    msg['From'] = SMTP_USER
+    msg['To'] = TO_EMAIL
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(body, 'plain'))
+    # Connect and send
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+    server.starttls()  # Upgrade the connection to secure
+    server.login(SMTP_USER, SMTP_PASSWORD)
+    server.send_message(msg)
+    server.quit()
 
 
 if __name__ == '__main__':
