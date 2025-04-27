@@ -4,11 +4,13 @@ from email.mime.multipart import MIMEMultipart
 import smtplib
 import json
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 SMTP_USER = "e.o.duvander@gmail.com"  # will need to create a designated adress for this
-SMTP_PASSWORD = os.environ.get("SMTP_PW")
+SMTP_PASSWORD = os.getenv("SMTP_PW")
 TO_EMAIL = 'dunderduvan@gmail.com'  # this will be set to the FN email
 
 app = Flask(__name__, static_folder='../src', static_url_path='')
@@ -40,6 +42,7 @@ def contact():
         email = request.form['email']
         message = request.form['msg']
 
+        # should this also be saved to db?
         subject = "New Contact Form Submission"
         body = f"""
                 You have received a new message from your website contact form:
