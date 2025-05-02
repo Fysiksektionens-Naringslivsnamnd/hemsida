@@ -3,24 +3,28 @@
     "title": "Mys med FN-dev",
     "date": "April 12, 2025",
     "description": "Engineers from Ericsson share insights into machine learning and real-world data challenges.",
-    "image": "../assets/img/case.jpg"
+    "image": "../assets/img/case.jpg",
+    "link": ""
   },
   {
     "title": "Case Night with BCG",
     "date": "April 22, 2025",
     "description": "Tackle business problems in teams and learn consulting strategies with professionals from BCG.",
-    "image": "../assets/img/case.jpg"
+    "image": "../assets/img/case.jpg",
+    "link": ""
   },
   {
     "title": "Case Night with BCG",
     "date": "April 22, 2025",
     "description": "Tackle business problems in teams and learn consulting strategies with professionals from BCG.",
-    "image": "../assets/img/case.jpg"
+    "image": "../assets/img/case.jpg",
+    "link": ""
   },
   {
     "title": "Case Night with BCG",
     "date": "April 22, 2025",
     "description": "Tackle business problems in teams and learn consulting strategies with professionals from BCG.",
-    "image": "../assets/img/case.jpg"
+    "image": "../assets/img/case.jpg",
+    "link": ""
   }
 ]
