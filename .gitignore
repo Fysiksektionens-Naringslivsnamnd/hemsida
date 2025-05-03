@@ -1,4 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+
+# Node
 node_modules/
-src/script.js
-src/styles.css
+*.log
+
+# Flask & env
 .env
+
+# Docker
+*.env
+*.pid
+*.sock
+*.tar
+*.db
+*.sqlite
+
+# OS/system
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Pycharm
+.idea/
