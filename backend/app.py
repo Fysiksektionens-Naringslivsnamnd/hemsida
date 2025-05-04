@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, send_from_directory, request, redirect, render_template
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from pathlib import Path
 import smtplib
 import json
 import os
@@ -30,6 +31,7 @@ def serve_assets(path):
 @app.route('/api/events')
 def get_events():
     # could database or other data source
+    data_path = Path(__file__).parent / 'data' / 'events.json'
     with open('data/events.json') as f:
         events = json.load(f)
     return jsonify(events)
@@ -76,5 +78,5 @@ def send_email(subject, body):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5001)
 
