@@ -2,17 +2,18 @@ from flask import Flask, jsonify, send_from_directory, request, redirect, render
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pathlib import Path
+import sqlite3
 import smtplib
 import json
 import os
 from dotenv import load_dotenv
 load_dotenv()
 
-SMTP_SERVER = 'smtp.gmail.com'
-SMTP_PORT = 587
-SMTP_USER = "e.o.duvander@gmail.com"  # will need to create a designated adress for this
+SMTP_SERVER = ''
+SMTP_PORT = None
+SMTP_USER = ''  # will need to create a designated adress for this
 SMTP_PASSWORD = os.getenv("SMTP_PW")
-TO_EMAIL = 'dunderduvan@gmail.com'  # this will be set to the FN email
+TO_EMAIL = ''  # this will be set to the FN email
 
 app = Flask(__name__, static_folder='../src', static_url_path='')
 
@@ -35,6 +36,30 @@ def get_events():
     with open('data/events.json') as f:
         events = json.load(f)
     return jsonify(events)
+
+@app.route('/pages/contact', methods=['GET'])
+def alumni_form():
+    if request.method == 'GET':
+        name = request.form['name']
+        email = request.form['email']
+        user_type = request.form['user_type'] # alumni or student
+        # TODO: determine details with head of alumni
+        with sqlite3.connect('data/alumni.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS alumni (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT,
+                    email TEXT,
+                    user_type TEXT
+                )
+            ''')
+            cursor.execute('''
+                INSERT INTO alumni (name, email, user_type)
+                VALUES (?, ?, ?)
+            ''', (name, email, user_type))
+            conn.commit()
+
 
 @app.route('/pages/contact', methods=['GET', 'POST'])
 def contact():
