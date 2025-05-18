@@ -39,6 +39,7 @@ def get_events():
 
 @app.route('/pages/contact', methods=['GET'])
 def alumni_form():
+    raise NotImplementedError("This function is not implemented.")
     if request.method == 'GET':
         name = request.form['name']
         email = request.form['email']
@@ -79,7 +80,7 @@ def contact():
                 Message:
                 {message}
                 """
-        send_email(subject, body)
+        # send_email(subject, body)
 
         #TODO: This info needs to be sent to designated email and saved to storage
 
