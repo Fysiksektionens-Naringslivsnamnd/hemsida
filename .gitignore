@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.pyc
+.venv/
 
 # Node
 node_modules/
@@ -22,9 +23,19 @@ node_modules/
 
 # VSCode
 .vscode/
+*.swp
+.DS_Store
 
 # Pycharm
 .idea/
 
 # Misc
 backend/.backend
+
+# Database + uploads
+*.db
+*.sqlite3
+static/uploads/*
+
+# Flask cache
+instance/

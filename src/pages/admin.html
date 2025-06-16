@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
+  <link rel="stylesheet" href="../assets/css/material-kit.css?v=2.0.4" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+  <style>
+    body {
+      background-color: #060c15;
+      color: white;
+    }
+
+    .profile-card {
+      background-color: #0a1220;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      object-fit: cover;
+    }
+
+    .profile-card h4 {
+      margin-bottom: 5px;
+      color: #ff9800;
+    }
+
+    .profile-card p {
+      font-size: 0.95rem;
+      color: #bbb;
+    }
+
+    .page-header {
+      text-align: center;
+      margin: 80px 0 40px;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Admin Panel – Manage Events</h2>
+
+    <!-- Add Event Form -->
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Add New Event</h4>
+        <form action="/admin/add-event" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="text" name="date" class="form-control" placeholder="e.g., April 12, 2025" required />
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" class="form-control" rows="3" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="btn btn-primary btn-round">
+              Upload Image
+              <input type="file" name="image_file" accept="image/*" hidden onchange="updateFileName(this)" required>
+            </label>
+            <span id="file-name" class="ml-2 text-muted"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Signup Link</label>
+            <input type="text" name="link" class="form-control" placeholder="Optional" />
+          </div>
+          <button type="submit" class="btn btn-success btn-round">Add Event</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Existing Events Table -->
+    <div class="card mt-5">
+      <div class="card-body">
+        <h4 class="card-title">Existing Events</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Link</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for event in events %}
+            <tr>
+              <td>{{ event.title }}</td>
+              <td>{{ event.date }}</td>
+              <td>{{ event.description }}</td>
+              <td><a href="{{ event.link }}" target="_blank">{{ event.link or '—' }}</a></td>
+              <td>
+                <form action="/admin/delete-event" method="POST" style="display:inline;">
+                  <input type="hidden" name="id" value="{{ event.id }}">
+                  <button type="submit" class="btn btn-danger btn-sm btn-round">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- File name display script -->
+  <script>
+    function updateFileName(input) {
+      const fileName = input.files[0]?.name || '';
+      document.getElementById('file-name').textContent = fileName;
+    }
+  </script>
+
+</html>
