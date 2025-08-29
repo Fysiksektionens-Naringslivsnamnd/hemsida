@@ -1,3 +1,4 @@
+from constants import SMTP_SERVER, SMTP_PORT, SMTP_USER, TO_EMAIL, USER_DB_PATH
 from flask import Flask, jsonify, send_from_directory, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
 from email.mime.text import MIMEText
@@ -9,16 +10,9 @@ import json
 import os
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
+
 load_dotenv()
 
-
-
-
-SMTP_SERVER = ''
-SMTP_PORT = None
-SMTP_USER = ''  # will need to create a designated adress for this
-SMTP_PASSWORD = os.getenv("SMTP_PW")
-TO_EMAIL = ''  # this will be set to the FN email
 
 # Absolute path to project root
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -63,7 +57,7 @@ def alumni_form():
         email = request.form['email']
         user_type = request.form['user_type'] # alumni or student
         # TODO: determine details with head of alumni
-        with sqlite3.connect('data/alumni.db') as conn:
+        with sqlite3.connect(USER_DB_PATH) as conn:
             cursor = conn.cursor()
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS alumni (
@@ -112,9 +106,11 @@ def send_email(subject, body):
     msg['To'] = TO_EMAIL
     msg['Subject'] = subject
 
+    pw = os.getenv("SMTP_PW")
+
     msg.attach(MIMEText(body, 'plain'))
     # Connect and send
-    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+    server = smtplib.SMTP(pw, SMTP_PORT)
     server.starttls()  # Upgrade the connection to secure
     server.login(SMTP_USER, SMTP_PASSWORD)
     server.send_message(msg)
@@ -179,7 +175,7 @@ def add_event():
 @app.route('/admin/delete-event', methods=['POST'])
 def delete_event():
     event_id = request.form['id']
-    event = Event.query.get(event_id)
+    event = Event.Session.get(event_id)
     if event:
          # 🔥 Try deleting the associated image file
         if event.image and event.image.startswith('/static/uploads/'):
@@ -191,7 +187,6 @@ def delete_event():
                 except Exception as e:
                     print(f"Warning: Could not delete image file: {e}")
 
-                    
         db.session.delete(event)
         db.session.commit()
     return redirect("/admin")
