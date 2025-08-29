@@ -8,38 +8,32 @@ import sqlite3
 import smtplib
 import json
 import os
-from dotenv import load_dotenv
-from flask_sqlalchemy import SQLAlchemy
-
-load_dotenv()
+from . import app, BASE_DIR
+from .models import db, Event
 
 
-# Absolute path to project root
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-app = Flask(
-    __name__,
-    static_folder=os.path.join(BASE_DIR, 'static'),        # ⬅️ points to /static
-    static_url_path='/static',                             # ⬅️ URLs start with /static
-    template_folder=os.path.join(BASE_DIR, 'src/pages')    # ⬅️ HTML lives here
-)
 
 
 @app.route('/')
 def serve_index():
     return render_template('index.html')
 
+
 @app.route("/contact")
 def serve_contact(): 
     return render_template('contact.html')
+
 
 @app.route('/pages/<path:path>')
 def serve_pages(path):
     return send_from_directory(os.path.join(app.static_folder, 'pages'), path)
 
+
 @app.route('/assets/<path:path>')
 def serve_assets(path):
     return send_from_directory(os.path.join(app.static_folder, 'assets'), path)
+
 
 @app.route('/api/events')
 def get_events():
@@ -49,29 +43,10 @@ def get_events():
         events = json.load(f)
     return jsonify(events)
 
+# TODO: implement sql_alchemy here
 @app.route('/pages/contact', methods=['GET'])
 def alumni_form(): 
     raise NotImplementedError("This function is not implemented.")
-    if request.method == 'GET':
-        name = request.form['name']
-        email = request.form['email']
-        user_type = request.form['user_type'] # alumni or student
-        # TODO: determine details with head of alumni
-        with sqlite3.connect(USER_DB_PATH) as conn:
-            cursor = conn.cursor()
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS alumni (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT,
-                    email TEXT,
-                    user_type TEXT
-                )
-            ''')
-            cursor.execute('''
-                INSERT INTO alumni (name, email, user_type)
-                VALUES (?, ?, ?)
-            ''', (name, email, user_type))
-            conn.commit()
 
 
 @app.route('/pages/contact', methods=['GET', 'POST'])
@@ -110,29 +85,11 @@ def send_email(subject, body):
 
     msg.attach(MIMEText(body, 'plain'))
     # Connect and send
-    server = smtplib.SMTP(pw, SMTP_PORT)
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
     server.starttls()  # Upgrade the connection to secure
-    server.login(SMTP_USER, SMTP_PASSWORD)
+    server.login(SMTP_USER, pw)
     server.send_message(msg)
     server.quit()
-
-
-
-# For database
-# === Configuration ===
-app.config['SECRET_KEY'] = 'your-secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///events.db'
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
-db = SQLAlchemy(app)
-
-# === Model ===
-class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    date = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    image = db.Column(db.String(300), nullable=False)
-    link = db.Column(db.String(300))
 
     
 # === Routes ===
@@ -144,27 +101,26 @@ def admin():
 
 @app.route('/admin/add-event', methods=['POST'])
 def add_event():
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static/uploads')
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    upload_folder = os.path.join(BASE_DIR, 'static/uploads')
+    os.makedirs(upload_folder, exist_ok=True)
+    app.config['UPLOAD_FOLDER'] = upload_folder
 
-    # ✅ Get form fields
+    # Get form fields
     title = request.form['title']
     date = request.form['date']
     description = request.form['description']
     link = request.form['link']
-
-    # ✅ Handle file upload
     file = request.files['image_file']
+
     if file and file.filename:
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
         image_url = f'/static/uploads/{filename}'
+
     else:
         image_url = ''  # or set a default image path
 
-    # ✅ Save to DB
     new_event = Event(title=title, date=date, description=description, image=image_url, link=link)
     db.session.add(new_event)
     db.session.commit()
@@ -177,7 +133,6 @@ def delete_event():
     event_id = request.form['id']
     event = Event.Session.get(event_id)
     if event:
-         # 🔥 Try deleting the associated image file
         if event.image and event.image.startswith('/static/uploads/'):
             # Build the full path from the relative URL
             image_path = os.path.join(BASE_DIR, event.image.lstrip('/'))
