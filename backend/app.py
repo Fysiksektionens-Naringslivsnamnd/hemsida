@@ -1,18 +1,14 @@
-from constants import SMTP_SERVER, SMTP_PORT, SMTP_USER, TO_EMAIL, USER_DB_PATH
-from flask import Flask, jsonify, send_from_directory, request, redirect, render_template, url_for
+from .constants import SMTP_SERVER, SMTP_PORT, SMTP_USER, TO_EMAIL, USER_DB_PATH
+from flask import jsonify, send_from_directory, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pathlib import Path
-import sqlite3
 import smtplib
 import json
 import os
 from . import app, BASE_DIR
 from .models import db, Event
-
-
-
 
 
 @app.route('/')
@@ -43,6 +39,7 @@ def get_events():
         events = json.load(f)
     return jsonify(events)
 
+
 # TODO: implement sql_alchemy here
 @app.route('/pages/contact', methods=['GET'])
 def alumni_form(): 
@@ -67,7 +64,7 @@ def contact():
                 Message:
                 {message}
                 """
-        # send_email(subject, body)
+        # _send_email(subject, body)
 
         #TODO: This info needs to be sent to designated email and saved to storage
 
@@ -75,7 +72,7 @@ def contact():
 
     return redirect('index.html')
 
-def send_email(subject, body):
+def _send_email(subject, body):
     msg = MIMEMultipart()
     msg['From'] = SMTP_USER
     msg['To'] = TO_EMAIL
@@ -152,12 +149,9 @@ def event():
     events = Event.query.all()
     return render_template('events.html', events=events)
 
-
-if __name__ == '__main__':
-
+def main():
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
     with app.app_context():
         db.create_all()
-    app.run(host='0.0.0.0', port=5001)   
-    
 
+    app.run(host='0.0.0.0', port=5001)
