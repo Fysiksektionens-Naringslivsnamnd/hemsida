@@ -7,52 +7,52 @@ from pathlib import Path
 import smtplib
 import json
 import os
-from . import app, BASE_DIR
-from .models import db, Event
+from . import app, db, BASE_DIR
+from .models import Event
 
 
-@app.route('/')
+@app.route("/")
 def serve_index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 @app.route("/contact")
-def serve_contact(): 
-    return render_template('contact.html')
+def serve_contact():
+    return render_template("contact.html")
 
 
-@app.route('/pages/<path:path>')
+@app.route("/pages/<path:path>")
 def serve_pages(path):
-    return send_from_directory(os.path.join(app.static_folder, 'pages'), path)
+    return send_from_directory(os.path.join(app.static_folder, "pages"), path)
 
 
-@app.route('/assets/<path:path>')
+@app.route("/assets/<path:path>")
 def serve_assets(path):
-    return send_from_directory(os.path.join(app.static_folder, 'assets'), path)
+    return send_from_directory(os.path.join(app.static_folder, "assets"), path)
 
 
-@app.route('/api/events')
+@app.route("/api/events")
 def get_events():
     # could database or other data source
-    data_path = Path(__file__).parent / 'data' / 'events.json'
-    with open('data/events.json') as f:
+    data_path = Path(__file__).parent / "data" / "events.json"
+    with open("data/events.json") as f:
         events = json.load(f)
     return jsonify(events)
 
 
 # TODO: implement sql_alchemy here
-@app.route('/pages/contact', methods=['GET'])
-def alumni_form(): 
+@app.route("/pages/contact", methods=["GET"])
+def alumni_form():
     raise NotImplementedError("This function is not implemented.")
 
 
-@app.route('/pages/contact', methods=['GET', 'POST'])
+@app.route("/pages/contact", methods=["GET", "POST"])
 def contact():
-    if request.method == 'POST':
+    if request.method == "POST":
         # Handle form submission
-        name = request.form['name']
-        email = request.form['email']
-        message = request.form['msg']
+        name = request.form["name"]
+        email = request.form["email"]
+        message = request.form["msg"]
 
         # should this also be saved to db?
         subject = "New Contact Form Submission"
@@ -66,73 +66,60 @@ def contact():
                 """
         # _send_email(subject, body)
 
-        #TODO: This info needs to be sent to designated email and saved to storage
+        # TODO: This info needs to be sent to designated email and saved to storage
 
-        return redirect("/index.html") # Redirect to a thank you page or similar
+        return redirect("/index.html")  # Redirect to a thank you page or similar
 
-    return redirect('index.html')
+    return redirect("index.html")
 
-def _send_email(subject, body):
-    msg = MIMEMultipart()
-    msg['From'] = SMTP_USER
-    msg['To'] = TO_EMAIL
-    msg['Subject'] = subject
 
-    pw = os.getenv("SMTP_PW")
-
-    msg.attach(MIMEText(body, 'plain'))
-    # Connect and send
-    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-    server.starttls()  # Upgrade the connection to secure
-    server.login(SMTP_USER, pw)
-    server.send_message(msg)
-    server.quit()
-
-    
 # === Routes ===
-@app.route('/admin', methods=['GET'])
+@app.route("/admin", methods=["GET"])
 def admin():
+    if os.getenv("ADMIN_KEY") is None:
+        return redirect("/")
+
     events = Event.query.all()
-    return render_template('admin.html', events=events)
+    return render_template("admin.html", events=events)
 
 
-@app.route('/admin/add-event', methods=['POST'])
+@app.route("/admin/add-event", methods=["POST"])
 def add_event():
-    upload_folder = os.path.join(BASE_DIR, 'static/uploads')
+    upload_folder = os.path.join(BASE_DIR, "static/uploads")
     os.makedirs(upload_folder, exist_ok=True)
-    app.config['UPLOAD_FOLDER'] = upload_folder
+    app.config["UPLOAD_FOLDER"] = upload_folder
 
     # Get form fields
-    title = request.form['title']
-    date = request.form['date']
-    description = request.form['description']
-    link = request.form['link']
-    file = request.files['image_file']
+    title = request.form["title"]
+    date = request.form["date"]
+    description = request.form["description"]
+    link = request.form["link"]
+    file = request.files["image_file"]
 
     if file and file.filename:
         filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(file_path)
-        image_url = f'/static/uploads/{filename}'
+        image_url = f"/static/uploads/{filename}"
 
     else:
-        image_url = ''  # or set a default image path
+        image_url = ""  # or set a default image path
 
     new_event = Event(title=title, date=date, description=description, image=image_url, link=link)
     db.session.add(new_event)
     db.session.commit()
 
-    return redirect('/admin')
+    return redirect("/admin")
 
 
-@app.route('/admin/delete-event', methods=['POST'])
+@app.route("/admin/delete-event", methods=["POST"])
 def delete_event():
-    event_id = request.form['id']
+    event_id = request.form["id"]
     event = Event.Session.get(event_id)
     if event:
-        if event.image and event.image.startswith('/static/uploads/'):
+        if event.image and event.image.startswith("/static/uploads/"):
             # Build the full path from the relative URL
-            image_path = os.path.join(BASE_DIR, event.image.lstrip('/'))
+            image_path = os.path.join(BASE_DIR, event.image.lstrip("/"))
             if os.path.exists(image_path):
                 try:
                     os.remove(image_path)
@@ -144,14 +131,15 @@ def delete_event():
     return redirect("/admin")
 
 
-@app.route('/events', methods=['GET'])
+@app.route("/events", methods=["GET"])
 def event():
     events = Event.query.all()
-    return render_template('events.html', events=events)
+    return render_template("events.html", events=events)
+
 
 def main():
-    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
     with app.app_context():
         db.create_all()
 
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host="0.0.0.0", port=5001)
