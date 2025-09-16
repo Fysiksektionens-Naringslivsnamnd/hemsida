@@ -1,10 +1,6 @@
-from .constants import SMTP_SERVER, SMTP_PORT, SMTP_USER, TO_EMAIL, USER_DB_PATH
 from flask import jsonify, send_from_directory, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from pathlib import Path
-import smtplib
 import json
 import os
 from . import app, db, BASE_DIR
@@ -73,7 +69,6 @@ def contact():
     return redirect("index.html")
 
 
-# === Routes ===
 @app.route("/admin", methods=["GET"])
 def admin():
     if os.getenv("ADMIN_KEY") is None:
@@ -135,11 +130,3 @@ def delete_event():
 def event():
     events = Event.query.all()
     return render_template("events.html", events=events)
-
-
-def main():
-
-    with app.app_context():
-        db.create_all()
-
-    app.run(host="0.0.0.0", port=5001)
