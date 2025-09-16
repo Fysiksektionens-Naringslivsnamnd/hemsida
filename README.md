@@ -25,7 +25,11 @@ Create a `.env` file in the root directory of your project and add the following
 touch .env
 echo SMTP_PW="your_smtp_password" >> .env
 ```
-
+### Step 4: Start the Development Server
+cd to project root directory and run:
+```sh
+python app.py 
+```
 ### Done. ✅ 
 
 ## How to contribute
