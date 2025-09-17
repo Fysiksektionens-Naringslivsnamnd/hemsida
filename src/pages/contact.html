@@ -26,6 +26,17 @@
       flex: 1 0 auto;
     }
 
+    #navbar-logo {
+      height: 30px; /* default white logo size */
+      transition: height 0.2s ease; /* smooth change */
+    }
+
+    #navbar-logo.black-logo {
+      height: 50px; /* larger black logo */
+      margin-top:-8px;
+    }
+
+
     .page-header {
       position: relative;
       background:
@@ -141,7 +152,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="./">
-          <img src="../assets/img/favicon.png" alt="Favicon" style="height: 30px;">
+          <img id="navbar-logo" src="assets/img/favicon.png" alt="Favicon">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
           aria-label="Toggle navigation">
@@ -259,6 +270,21 @@
       span.textContent = char === ' ' ? '\u00A0' : char;
       title.appendChild(span);
     });
+
+    
+     document.addEventListener("scroll", function () {
+    const logo = document.getElementById("navbar-logo");
+
+    if (window.scrollY > 100) {
+      logo.src = "assets/img/favicon_black.png";
+      logo.classList.add("black-logo");
+    } else {
+      logo.src = "assets/img/favicon.png";
+      logo.classList.remove("black-logo");
+    }
+  });
+
+
   </script>
 </body>
 
