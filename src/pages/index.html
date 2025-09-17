@@ -26,15 +26,34 @@
     /* Parallax header at the top with background image and gradient overlay */
     .page-header {
       background:
-        linear-gradient(to bottom, rgba(6,12,21,0) 0%, rgba(6,12,21,1) 100%),
-        url('assets/img/FN_fbbanner.png') no-repeat center center;
-      background-size: cover;
+        url('assets/img/FN_fbbanner_new.png') no-repeat center center;
+      background-size: contain;
       height: 100vh;
     }
+
+    /* For smaller screens (phones) */
+    @media (max-width: 900px) {
+      .page-header {
+        background:
+          url('assets/img/FN_small_banner.png') no-repeat center center;
+        background-size: contain;
+      }
+    } 
+
+    #navbar-logo {
+      height: 30px; /* default white logo size */
+      transition: height 0.2s ease; /* smooth change */
+    }
+
+    #navbar-logo.black-logo {
+      height: 50px; /* larger black logo */
+      margin-top:-8px;
+    }
+
     /* Intro section (no parallax effect) */
     #intro {
       height: 100vh;
-      padding-top: 40vh; /* pushes content lower */
+      padding-top: 10vh; /* pushes content lower */
       color: white !important;
       display: flex;
       align-items: flex-start;
@@ -140,7 +159,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="./">
-          <img src="assets/img/favicon.png" alt="Favicon" style="height: 30px;">
+          <img id="navbar-logo" src="assets/img/favicon.png" alt="Favicon">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -301,6 +320,19 @@
   <script>
     var copy = document.querySelector(".logos-slide").cloneNode(true);
     document.querySelector(".logos").appendChild(copy);
+
+
+     document.addEventListener("scroll", function () {
+    const logo = document.getElementById("navbar-logo");
+
+    if (window.scrollY > 100) {
+      logo.src = "assets/img/favicon_black.png";
+      logo.classList.add("black-logo");
+    } else {
+      logo.src = "assets/img/favicon.png";
+      logo.classList.remove("black-logo");
+    }
+  });
   </script>
 
   <!-- Footer -->
