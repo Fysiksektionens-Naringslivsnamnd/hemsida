@@ -1,10 +1,12 @@
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from functools import wraps
-import smtplib
-from .constants import SMTP_SERVER, SMTP_PORT, SMTP_USER, TO_EMAIL
 import os
-from flask import session, redirect, url_for, request
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from functools import wraps
+
+from flask import redirect, request, session, url_for
+
+from .constants import SMTP_PORT, SMTP_SERVER, SMTP_USER, TO_EMAIL
 
 
 def require_admin(view_function):
@@ -13,7 +15,8 @@ def require_admin(view_function):
         if session.get("is_admin") is True:
             return view_function(*args, **kwargs)
         session["is_admin"] = False
-        return redirect(url_for("admin_login", next = request.path))
+        return redirect(url_for("admin_login", next=request.path))
+
     return wrapper
 
 

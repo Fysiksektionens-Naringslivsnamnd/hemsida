@@ -1,6 +1,7 @@
 import os
-from flask import Flask
+
 from dotenv import load_dotenv
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))

@@ -1,10 +1,13 @@
-from flask import jsonify, send_from_directory, request, redirect, render_template, url_for, session
-from werkzeug.utils import secure_filename
-from werkzeug.security import check_password_hash
-from pathlib import Path
 import json
 import os
-from . import app, db, BASE_DIR, ADMIN_PASSWORD_HASH
+from pathlib import Path
+
+from flask import (jsonify, redirect, render_template, request,
+                   send_from_directory, session, url_for)
+from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
+
+from . import ADMIN_PASSWORD_HASH, BASE_DIR, app, db
 from .models import Event
 from .utils import require_admin
 
@@ -12,6 +15,7 @@ from .utils import require_admin
 @app.route("/")
 def serve_index():
     return render_template("index.html")
+
 
 @app.route("/contact")
 def serve_contact():
@@ -99,7 +103,9 @@ def add_event():
     else:
         image_url = ""  # or set a default image path
 
-    new_event = Event(title=title, date=date, description=description, image=image_url, link=link)
+    new_event = Event(
+        title=title, date=date, description=description, image=image_url, link=link
+    )
     db.session.add(new_event)
     db.session.commit()
 
