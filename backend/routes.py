@@ -1,16 +1,17 @@
-from flask import jsonify, send_from_directory, request, redirect, render_template, url_for
+from flask import jsonify, send_from_directory, request, redirect, render_template, url_for, session
 from werkzeug.utils import secure_filename
+from werkzeug.security import check_password_hash
 from pathlib import Path
 import json
 import os
-from . import app, db, BASE_DIR
+from . import app, db, BASE_DIR, ADMIN_PASSWORD_HASH
 from .models import Event
+from .utils import require_admin
 
 
 @app.route("/")
 def serve_index():
     return render_template("index.html")
-
 
 @app.route("/contact")
 def serve_contact():
@@ -70,10 +71,8 @@ def contact():
 
 
 @app.route("/admin", methods=["GET"])
+@require_admin
 def admin():
-    if os.getenv("ADMIN_KEY") is None:
-        return redirect("/")
-
     events = Event.query.all()
     return render_template("admin.html", events=events)
 
@@ -130,3 +129,29 @@ def delete_event():
 def event():
     events = Event.query.all()
     return render_template("events.html", events=events)
+
+
+@app.get("/admin/login")
+def admin_login():
+    # If already logged in, go to target
+    nxt = request.args.get("next") or url_for("admin_panel")
+    if session.get("is_admin"):
+        return redirect(nxt)
+    return render_template("admin_login.html", next=nxt)
+
+
+@app.post("/admin/login")
+def admin_login_post():
+    password = request.form.get("password", "")
+    nxt = request.form.get("next") or url_for("admin_panel")
+    if check_password_hash(ADMIN_PASSWORD_HASH, password):
+        session["is_admin"] = True
+        session.permanent = False
+        return redirect(nxt)
+    return render_template("admin_login.html", next=nxt, error="Invalid password.")
+
+
+@app.post("/admin/logout")
+def admin_logout():
+    session.pop("is_admin", None)
+    return redirect(url_for("admin_login"))

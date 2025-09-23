@@ -1,8 +1,20 @@
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from functools import wraps
 import smtplib
 from .constants import SMTP_SERVER, SMTP_PORT, SMTP_USER, TO_EMAIL
 import os
+from flask import session, redirect, url_for, request
+
+
+def require_admin(view_function):
+    @wraps(view_function)
+    def wrapper(*args, **kwargs):
+        if session.get("is_admin") is True:
+            return view_function(*args, **kwargs)
+        session["is_admin"] = False
+        return redirect(url_for("admin_login", next = request.path))
+    return wrapper
 
 
 def _send_email(subject, body):

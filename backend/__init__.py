@@ -6,6 +6,13 @@ from flask_sqlalchemy import SQLAlchemy
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 load_dotenv()
+
+ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PW_HASH")
+
+if not ADMIN_PASSWORD_HASH:
+    raise ValueError("ADMIN_PW_HASH environment variable is not set.")
+
+
 app = Flask(
     __name__,
     static_folder=os.path.join(BASE_DIR, "static"),
