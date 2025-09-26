@@ -1,5 +1,7 @@
 import typer
 from backend.routes import app
+from waitress import serve
+
 
 
 def main(
@@ -7,7 +9,10 @@ def main(
         port: int = typer.Option(5001, "--port"),
         debug: bool = typer.Option(False, "--debug")
 ):
-    app.run(host=host, port=port, debug=debug)
+    if debug:
+        app.run(host=host, port=port, debug=True)
+    else:
+        serve(app, host=host, port=port, threads = 10)
 
 
 if __name__ == "__main__":
