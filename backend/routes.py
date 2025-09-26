@@ -69,9 +69,9 @@ def contact():
 
         # TODO: This info needs to be sent to designated email and saved to storage
 
-        return redirect("/index.html")  # Redirect to a thank you page or similar
+        return redirect("/")  # Redirect to a thank you page or similar
 
-    return redirect("index.html")
+    return redirect("/")
 
 
 @app.route("/admin", methods=["GET"])
