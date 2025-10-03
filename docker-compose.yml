@@ -6,8 +6,8 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - ./backend:/app/backend
-      - .env:/app/.env
+      - ./backend:/backend
+      - .env:/.env
     env_file:
       - .env
     restart: always
