@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=42", "wheel", "bumpver", "black"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -32,8 +32,8 @@ dependencies = [
 requires-python = ">=3.8"
 authors = [
     {name = "Erik Duvander", email = "duvander@kth.se"},
-    {name = "Allan Effendic", email = "mail@kth.se"},
-    {name = "Erik Duvander", email = "duvander@kth.se"},
+    {name = "Allan Efendic", email = "allane@kth.se"},
+    {name = "André Nilsson", email = "andren4@kth.se"},
 ]
 
 [tool.bumpver]
@@ -43,3 +43,6 @@ version_pattern = "MAJOR.MINOR.PATCH"
 [tool.bumpver.file_patterns]
 "pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
 "backend/__init__.py" = ['__version__ = "{version}"']
+
+[tool.black]
+line-length = 120
