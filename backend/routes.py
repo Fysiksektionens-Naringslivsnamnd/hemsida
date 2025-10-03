@@ -115,7 +115,7 @@ def add_event():
 @app.route("/admin/delete-event", methods=["POST"])
 def delete_event():
     event_id = request.form["id"]
-    event = Event.Session.get(event_id)
+    event = Event.query.get(event_id)
     if event:
         if event.image and event.image.startswith("/static/uploads/"):
             # Build the full path from the relative URL
