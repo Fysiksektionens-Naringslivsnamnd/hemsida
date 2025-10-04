@@ -83,7 +83,7 @@ def admin():
 
 @app.route("/admin/add-event", methods=["POST"])
 def add_event():
-    upload_folder = os.path.join(BASE_DIR, "static/uploads")
+    upload_folder = os.path.join(BASE_DIR, "src/static/uploads")
     os.makedirs(upload_folder, exist_ok=True)
     app.config["UPLOAD_FOLDER"] = upload_folder
 
@@ -98,7 +98,7 @@ def add_event():
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(file_path)
-        image_url = f"/static/uploads/{filename}"
+        image_url = f"/src/static/uploads/{filename}"
 
     else:
         image_url = ""  # or set a default image path

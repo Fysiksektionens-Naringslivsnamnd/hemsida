@@ -18,14 +18,14 @@ if not ADMIN_PASSWORD_HASH:
 
 app = Flask(
     __name__,
-    static_folder=os.path.join(BASE_DIR, "static"),
-    static_url_path="/static",
+    static_folder=os.path.join(BASE_DIR, "src/static"),
+    static_url_path="/src/static",
     template_folder=os.path.join(BASE_DIR, "src/pages"),
 )
 
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///events.db"
-app.config["UPLOAD_FOLDER"] = "static/uploads"
+app.config["UPLOAD_FOLDER"] = "src/static/uploads"
 
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 db = SQLAlchemy(app)
