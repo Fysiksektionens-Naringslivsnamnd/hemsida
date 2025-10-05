@@ -41,12 +41,6 @@ def get_events():
     return jsonify(events)
 
 
-# TODO: implement sql_alchemy here
-@app.route("/pages/contact", methods=["GET"])
-def alumni_form():
-    raise NotImplementedError("This function is not implemented.")
-
-
 @app.route("/pages/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -98,7 +92,7 @@ def add_event():
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(file_path)
-        image_url = f"/src/static/uploads/{filename}"
+        image_url = f"/static/uploads/{filename}"
 
     else:
         image_url = ""  # or set a default image path

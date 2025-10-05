@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Events</title>
-  <link rel="stylesheet" href="../assets/css/material-kit.css?v=2.0.4" />
+  <link rel="stylesheet" href="/assets/css/material-kit.css?v=2.0.4" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -123,7 +123,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="./">
-           <img id="navbar-logo" src="assets/img/favicon.png" alt="Favicon">
+           <img id="navbar-logo" src="/assets/img/favicon.png" alt="Favicon">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -180,20 +180,20 @@
 
 
 
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="../assets/js/material-kit.js?v=2.0.4"></script>
+  <script src="/assets/js/core/jquery.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="/assets/js/material-kit.js?v=2.0.4"></script>
 
   <script>
      document.addEventListener("scroll", function () {
     const logo = document.getElementById("navbar-logo");
 
     if (window.scrollY > 100) {
-      logo.src = "assets/img/favicon_black.png";
+      logo.src = "/assets/img/favicon_black.png";
       logo.classList.add("black-logo");
     } else {
-      logo.src = "assets/img/favicon.png";
+      logo.src = "/assets/img/favicon.png";
       logo.classList.remove("black-logo");
     }
   });
