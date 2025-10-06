@@ -3,7 +3,6 @@ from backend.routes import app
 from waitress import serve
 
 
-
 def main(
         host: str = typer.Option("0.0.0.0", "--host", ),
         port: int = typer.Option(5001, "--port"),
