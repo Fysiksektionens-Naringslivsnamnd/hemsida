@@ -11,7 +11,7 @@ def main(
     if debug:
         app.run(host=host, port=port, debug=True)
     else:
-        serve(app, host=host, port=port, threads = 10)
+        serve(app, host=host, port=port, threads=10)
 
 
 if __name__ == "__main__":
