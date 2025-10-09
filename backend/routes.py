@@ -77,9 +77,8 @@ def admin():
 
 @app.route("/admin/add-event", methods=["POST"])
 def add_event():
-    upload_folder = os.path.join(BASE_DIR, "src/static/uploads")
-    os.makedirs(upload_folder, exist_ok=True)
-    app.config["UPLOAD_FOLDER"] = upload_folder
+
+    assert os.path.exists(app.config["UPLOAD_FOLDER"]), "Upload folder does not exist."
 
     # Get form fields
     title = request.form["title"]

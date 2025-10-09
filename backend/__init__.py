@@ -24,14 +24,15 @@ app = Flask(
     template_folder=os.path.join(BASE_DIR, "src/pages"),
 )
 
+upload_folder = os.path.join(BASE_DIR, "src/static/uploads")
+os.makedirs(upload_folder, exist_ok=True)
+
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///events.db"
-app.config["UPLOAD_FOLDER"] = "src/static/uploads"
+app.config["UPLOAD_FOLDER"] = upload_folder
 
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
 
-os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 db = SQLAlchemy(app)
 
-with app.app_context():
-    db.create_all()
+

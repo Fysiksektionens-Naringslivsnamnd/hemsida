@@ -1,4 +1,4 @@
-from . import db
+from . import db, app
 
 
 class Event(db.Model):
@@ -22,3 +22,7 @@ class Alumni(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     surname = db.Column(db.String)
+
+
+with app.app_context():
+    db.create_all()
